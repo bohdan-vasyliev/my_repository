@@ -39,10 +39,10 @@ if __name__ == "__main__":
 
         print(cart)
         print(cart1)
-
+        
         cart += cart1
+        
         print(cart)
-
 
         discount = RegularDiscount()
         order = Order('Walter', 'White', cart, discount)

@@ -30,7 +30,7 @@ class Cart:
 
     def __iadd__(self, cart):
         if not isinstance(cart, Cart):
-            raise NotImplemented
+            raise TypeError
         
         products = [n.name for n in self.__products]
         for p, q in zip(cart.__products, cart.__quantities):
@@ -40,20 +40,9 @@ class Cart:
             else:
                 i = products.index(p.name)
                 self.__quantities[i] += q
+        return self
 
 
-    # def __radd__(self, cart):
-    #     if not isinstance(cart, Cart):
-    #         raise NotImplemented
-        
-    #     products = [n.name for n in self.__products]
-    #     for p, q in zip(cart.__products, cart.__quantities):
-    #         if p.name not in products:
-    #             self.__products.append(p)
-    #             self.__quantities.append(q)
-    #         else:
-    #             i = products.index(p.name)
-    #             self.__quantities[i] += q
 
 
     def total(self):
