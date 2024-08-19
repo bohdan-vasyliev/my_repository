@@ -30,7 +30,7 @@ class Cart:
 
     def __iadd__(self, cart):
         if not isinstance(cart, Cart):
-            raise TypeError
+            raise TypeError('Cart can add only objects of Cart type')
         
         products = [n.name for n in self.__products]
         for p, q in zip(cart.__products, cart.__quantities):
