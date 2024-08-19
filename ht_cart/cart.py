@@ -10,16 +10,12 @@ class Cart:
         
 
     def add_product(self, product: Product, quantity: int=1) -> None:
-        '''
-        Adds purchase to the list.
 
-        :param purchase: Your purchase.
-        '''
         if not isinstance(product, Product):
             #logger.error('Product must be a Product object')
             raise TypeError('Product must be a Product object')
         if not isinstance(quantity, int):
-            logger.error('Quantity must be an integer number')
+            #logger.error('Quantity must be an integer number')
             raise TypeError('Quantity must be an integer number')
         if quantity <= 0:
             #logger.error('Quantity must be positive')
@@ -32,10 +28,35 @@ class Cart:
         #logger.info(f'Cart instance added Product instance parameters')
 
 
+    def __iadd__(self, cart):
+        if not isinstance(cart, Cart):
+            raise NotImplemented
+        
+        products = [n.name for n in self.__products]
+        for p, q in zip(cart.__products, cart.__quantities):
+            if p.name not in products:
+                self.__products.append(p)
+                self.__quantities.append(q)
+            else:
+                i = products.index(p.name)
+                self.__quantities[i] += q
+
+
+    # def __radd__(self, cart):
+    #     if not isinstance(cart, Cart):
+    #         raise NotImplemented
+        
+    #     products = [n.name for n in self.__products]
+    #     for p, q in zip(cart.__products, cart.__quantities):
+    #         if p.name not in products:
+    #             self.__products.append(p)
+    #             self.__quantities.append(q)
+    #         else:
+    #             i = products.index(p.name)
+    #             self.__quantities[i] += q
+
+
     def total(self):
-        '''
-        Counts final amount of all purchases in list.
-        '''
         result = 0
         for p, q in zip(self.__products, self.__quantities):
             result += p.price * q

@@ -22,6 +22,28 @@ if __name__ == "__main__":
         cart.add_product(p5, 1)
 
 
+        p6 = Product('Cucumber', 1000.0)
+        p7 = Product('OOP', 5.0)
+        p8 = Product('Laptop', 200.0)
+        p9 = Product('Gg', 150.0)
+        p10 = Product('Mug', 100.0)
+
+
+        cart1 = Cart()
+        cart1.add_product(p6, 1)
+        cart1.add_product(p7, 2)
+        cart1.add_product(p8, 4)
+        cart1.add_product(p9, 1)
+        cart1.add_product(p10, 1)
+
+
+        print(cart)
+        print(cart1)
+
+        cart += cart1
+        print(cart)
+
+
         discount = RegularDiscount()
         order = Order('Walter', 'White', cart, discount)
 
