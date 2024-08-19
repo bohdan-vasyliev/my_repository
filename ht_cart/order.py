@@ -23,6 +23,6 @@ class Order:
 
 
     def __str__(self) -> str:
-        return f"Order ID: {self.order_id}\nOrder Date: {self.order_date}\nCart: {self.cart}\nTotal: {self.price()}"
+        return f"Order ID: {self.order_id}\nOrder Date: {self.order_date}\nCart: {self.cart}\nTotal: {self.price():.2f}"
     
 
