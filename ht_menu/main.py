@@ -2,6 +2,12 @@ if __name__ == '__main__':
     from dish import Dish
     from category import MenuCategory
     from menu import Menu
+    from order import Order
+    from discount import Discount, SilverDiscount, GoldenDiscount
+    from exeptions import PriceError
+
+
+
 
     try:
         dish_1 = Dish("Pizza", 12.5)
@@ -27,7 +33,33 @@ if __name__ == '__main__':
         menu = Menu(name="Restaurant Menu")
         menu.add_category(category_1)
         menu.add_category(category_2)
-    
+
+        discount = SilverDiscount()
+
+        order = Order('Jesse', 'Pinkman', discount)
+
+
+
         print(menu)
+
+        
+        order.add_dish(dish_1, 1)
+        order.add_dish(dish_2, 1)
+        order.add_dish(dish_3, 1)
+        order.add_dish(dish_4, 1)
+        order.add_dish(dish_5, 1)
+        order.add_dish(dish_6, 1)
+        order.add_dish(dish_7, 1)
+
+
+        order += dish_1
+        order += dish_3
+        order += dish_7
+
+
+        #print(order.positions())
+        print(order)
+
+
     except Exception as e:
         print(e)
