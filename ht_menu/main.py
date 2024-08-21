@@ -57,8 +57,9 @@ if __name__ == '__main__':
         order += dish_7
 
 
-        #print(order.positions())
+        print(order.positions())
         print(order)
+
 
 
     except Exception as e:

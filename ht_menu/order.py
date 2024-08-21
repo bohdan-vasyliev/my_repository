@@ -15,6 +15,7 @@ class Order:
         self.discount = discount
         self.__dishes = []
         self.__quantities = []
+        
 
 
     def add_dish(self, dish: Dish, quantity: int = 1):
@@ -34,24 +35,30 @@ class Order:
             raise ValueError(f'There is no {dish} in the order')
         if not isinstance(quantity, int):
             raise TypeError('Quantity must be an integer')
-        if quantity > self.__dishes[self.__dishes.index(dish)]:
-            raise ValueError(f'There is less quantity of {dish} in the order')
         
+        names = [d.name for d in self.__dishes]
+        
+        if quantity > self.__quantities[names.index(dish.name)]:
+            raise ValueError(f'There is less quantity of {dish} in the order')
+        if quantity == self.__quantities[names.index(dish.name)]:
 
-        self.__dishes.pop(self.__dishes.index(dish))
-        self.__quantities.pop(self.__dishes.index(dish))
+            self.__dishes.pop(names.index(dish.name))
+            self.__quantities.pop(names.index(dish.name))
 
+
+        self.__quantities[names.index(dish.name)] -= quantity
 
     def __iadd__(self, dish: Dish):
         if not isinstance(dish, Dish):
             raise TypeError('Dish must be a Discount class instance')
 
-        if dish.name not in self.__dishes:
+        dishes = [d.name for d in self.__dishes]
+        if dish.name not in dishes:
                 self.__dishes.append(dish)
                 self.__quantities.append(1)
         else:
-            i = self.__dishes.index(dish.name)
-            self.__dishes[i] += 1
+            i = dishes.index(dish.name)
+            self.__quantities[i] += 1
 
         return self
 
@@ -64,7 +71,7 @@ class Order:
     
 
     def positions(self):
-        return + ''.join(f'{d.name} x {q}\n' for d, q in zip(self.__dishes, self.__quantities))
+        return ''.join(f'{d.name} x {q}\n' for d, q in zip(self.__dishes, self.__quantities))
 
     
     def __str__(self) -> str:
