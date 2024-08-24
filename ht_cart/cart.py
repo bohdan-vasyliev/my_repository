@@ -7,7 +7,7 @@ class Cart:
     def __init__(self) -> None:
         self.__products = []
         self.__quantities = []
-        
+
 
     def add_product(self, product: Product, quantity: int=1) -> None:
 
@@ -32,17 +32,36 @@ class Cart:
         if not isinstance(cart, Cart):
             raise TypeError('Cart can add only objects of Cart type')
         
-        products = [n.name for n in self.__products]
+        products_names = [n.name for n in self.__products]
         for p, q in zip(cart.__products, cart.__quantities):
-            if p.name not in products:
+            if p.name not in products_names:
                 self.__products.append(p)
                 self.__quantities.append(q)
             else:
-                i = products.index(p.name)
+                i = products_names.index(p.name)
                 self.__quantities[i] += q
         return self
 
 
+    def __getitem__(self, item: int):
+        return self.__products[item]
+
+
+    def __len__(self):
+        return len(self.__products)
+
+
+    def __iter__(self):
+        self.index = 0
+        return self
+
+
+    def __next__(self):
+        if self.index < len(self.__products):
+            index = self.index
+            self.index += 1
+            return self.__products[index], self.__quantities[index]
+        raise StopIteration
 
 
     def total(self):

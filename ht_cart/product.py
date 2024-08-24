@@ -30,4 +30,4 @@ class Product:
         :param price: Price of product in $USA.
         :param quantity: Quantity of the product.
         '''
-        return f'\nProduct: {self.name}\nPrice: {self.price}$'
+        return f'{self.name} - {self.price}$'

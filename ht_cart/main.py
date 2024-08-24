@@ -41,6 +41,7 @@ if __name__ == "__main__":
 
         print(order)
 
+
     except PriceError as pe:
         print(f'Price error: {pe}')
     except TypeError as te:
