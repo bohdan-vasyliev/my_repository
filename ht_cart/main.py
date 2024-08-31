@@ -41,6 +41,8 @@ if __name__ == "__main__":
 
         print(order)
 
+        for i in cart:
+            print(i)
 
     except PriceError as pe:
         print(f'Price error: {pe}')
